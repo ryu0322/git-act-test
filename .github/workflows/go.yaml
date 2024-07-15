@@ -1,10 +1,11 @@
-name: Go Test
+name: Go test
 
 on:
   push:
+    branches:
+      - main
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
@@ -14,6 +15,10 @@ jobs:
      uses: actions/setup-go@v5
      with:
        go-version: '1.22'
-
-    -name: Build
-     run: go build -v .
+       
+    # Goアプリケーションのビルド
+    - name: Build
+      run: go build -v ./...
+    # テストの実行
+    - name: Test
+      run: go test -v ./...
